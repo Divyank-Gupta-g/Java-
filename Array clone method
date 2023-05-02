@@ -1,0 +1,30 @@
+import java.util.*;
+
+class cloned {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter the length of array = ");
+        int l = sc.nextInt();
+        int arr[] = new int[l];
+        int i;
+
+        System.out.println("Enter array elements: ");
+        for(i=0; i<l; i++) {
+            arr[i] = sc.nextInt();
+        }
+  
+        System.out.println("Print original array elements:");
+        for(i=0; i<l; i++) {
+            System.out.println(arr[i]);
+        }
+
+        int cArr[] = arr.clone();
+
+        System.out.println("Print clone array elements: ");
+        for(i=0; i<l; i++) {
+            System.out.println(cArr[i]);
+        }
+
+       
+    }
+}
