@@ -1,0 +1,56 @@
+import java.util.* ;
+import java.io.*; 
+import java.util.Scanner;
+
+class ComplexNumbers {
+	private int real;
+	private int imag;
+	
+	public ComplexNumbers(int real, int imag){
+		this.real = real;
+		this.imag = imag;
+	}
+
+	public void plus(ComplexNumbers other){
+		this.real += other.real;
+		this.imag += other.imag;
+	}
+	
+	public void multiply(ComplexNumbers other){
+		int newReal = this.real*other.real - this.imag*other.imag;
+		int newImag = this.imag*other.real + this.real*other.imag;
+		this.real = newReal;
+		this.imag = newImag;
+	}
+
+	public void printComplex(){
+		System.out.println(this.real + " + i" + this.imag);
+	}
+}
+
+class Solution {
+	
+	public static void main(String args[]) {
+		Scanner sc = new Scanner(System.in);
+		
+		int realc1 = sc.nextInt();
+		int imagc1 = sc.nextInt();
+	    ComplexNumbers c1 = new ComplexNumbers(realc1, imagc1);
+
+		int realc2 = sc.nextInt();
+		int imagc2 = sc.nextInt();
+		ComplexNumbers c2 = new ComplexNumbers(realc2, imagc2);
+
+		int choice = sc.nextInt();
+
+		if(choice==1){
+			c1.plus(c2);
+			c1.printComplex();
+		}
+		else if(choice==2){
+			c1.multiply(c2);
+			c1.printComplex();
+		}
+	}
+}
+		
