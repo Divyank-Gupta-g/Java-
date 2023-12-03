@@ -1,0 +1,168 @@
+import java.util.* ;
+import java.io.*; 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+class Polynomial{
+    // Don't change this name.
+    public int[] coef;  // name of the array -> coefficients
+
+    public Polynomial(int coeff, int degree) {
+        this.coef = new int[degree + 1];
+        this.coef[degree] = coeff;
+    }
+
+    // Copy Constructor
+    public Polynomial(Polynomial other) {
+        this.coef = Arrays.copyOf(other.coef, other.coef.length);
+    }
+
+    // Addition of polynomials
+    public Polynomial plus(Polynomial other) {
+        int maxSize = Math.max(this.coef.length, other.coef.length);
+        int[] result = new int[maxSize];
+        for (int i = 0; i < this.coef.length; i++) {
+            result[i] += this.coef[i];
+        }
+        for (int i = 0; i < other.coef.length; i++) {
+            result[i] += other.coef[i];
+        }
+        return new Polynomial(result, maxSize);
+    }
+
+    // Subtraction of polynomials
+    public Polynomial minus(Polynomial other) {
+        int maxSize = Math.max(this.coef.length, other.coef.length);
+        int[] result = new int[maxSize];
+        for (int i = 0; i < this.coef.length; i++) {
+            result[i] += this.coef[i];
+        }
+        for (int i = 0; i < other.coef.length; i++) {
+            result[i] -= other.coef[i];
+        }
+        return new Polynomial(result, maxSize);
+    }
+
+    // Multiplication of polynomials
+    public Polynomial times(Polynomial other) {
+        int maxSize = this.coef.length + other.coef.length - 1;
+        int[] result = new int[maxSize];
+        for (int i = 0; i < this.coef.length; i++) {
+            for (int j = 0; j < other.coef.length; j++) {
+                result[i + j] += this.coef[i] * other.coef[j];
+            }
+        }
+        return new Polynomial(result, maxSize);
+    }
+
+    // Constructor for result polynomial
+    private Polynomial(int[] coef, int size) {
+        this.coef = Arrays.copyOf(coef, size);
+    }
+
+    // ToString method for better output
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        for (int i = coef.length - 1; i >= 0; i--) {
+            if (coef[i] != 0) {
+                result.insert(0, coef[i] + "x" + i + " ");
+            }
+        }
+    
+        return result.toString();
+    }
+}
+
+public class Solution {
+    // test client
+    public static void main( String[] args ) throws IOException {
+
+        int count1, count2, choice;
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        count1 = Integer.parseInt(br.readLine().split(" ")[0]);
+
+        int[] degree1 = new int[count1];
+        int[] coeff1 = new int[count1];
+
+        String nm[] = br.readLine().split(" ");
+        for (int i = 0; i < count1; i++) {
+            degree1[i] = Integer.parseInt(nm[i]);
+        }
+
+        nm = br.readLine().split(" ");
+        for (int i = 0; i < count1; i++) {
+            coeff1[i] = Integer.parseInt(nm[i]);
+        }
+
+        Polynomial first = new Polynomial(0,0);
+        for (int i = 0; i < count1; i++) {
+            first = first.plus(new Polynomial(coeff1[i],degree1[i]));
+        }
+
+        count2 = Integer.parseInt(br.readLine().split(" ")[0]);
+
+        int[] degree2 = new int[count2];
+        int[] coeff2 = new int[count2];
+
+        nm = br.readLine().split(" ");
+        for (int i = 0; i < count2; i++) {
+            degree2[i] = Integer.parseInt(nm[i]);
+        }
+
+        nm = br.readLine().split(" ");
+        for (int i = 0; i < count2; i++) {
+            coeff2[i] = Integer.parseInt(nm[i]);
+        }
+
+        Polynomial second = new Polynomial(0,0);
+        for (int i = 0; i < count2; i++) {
+            second = second.plus(new Polynomial(coeff2[i],degree2[i]));
+        }
+
+        choice = Integer.parseInt(br.readLine().split(" ")[0]);
+
+        Polynomial result = new Polynomial(0,0);
+        switch (choice) {
+            // Add
+            case 1 : {
+                result = first.plus(second);
+                System.out.println(result);
+                break;
+            }
+            // Subtract
+            case 2 : {
+                result = first.minus(second);
+                System.out.println(result);
+                break;
+            }
+            // Multiply
+            case 3 : {
+                result = first.times(second);
+                System.out.println(result);
+                break;
+            }
+            case 4 : // Copy constructor
+            {
+                Polynomial third = new Polynomial(first);
+                if (third.coef == first.coef) {
+                    System.out.println("false");
+                } else {
+                    System.out.println("true");
+                }
+                break;
+            }
+            case 5 : // Copy assignment operator
+            {
+                Polynomial fourth = new Polynomial(first);
+                if (fourth.coef == first.coef) {
+                    System.out.println("false");
+                } else {
+                    System.out.println("true");
+                }
+                break;
+            }
+        }
+    }
+}
