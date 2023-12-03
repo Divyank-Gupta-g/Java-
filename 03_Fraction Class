@@ -1,0 +1,71 @@
+import java.util.* ;
+import java.io.*; 
+
+class Fraction {
+	private int numerator;
+	private int denominator;
+	// Complete the class
+	public Fraction(int numerator, int denominator){
+		this.numerator = numerator;
+		this.denominator = denominator;
+	}
+
+	public void add(Fraction other){
+		numerator = numerator*other.denominator + denominator*other.numerator;
+		denominator = denominator*other.denominator;
+		simplify();
+	}
+
+	public void multiply(Fraction other){
+		numerator = numerator*other.numerator;
+		denominator = denominator*other.denominator;
+		simplify();
+	}
+
+	public void simplify(){
+		int gcd = inbuilt_gcd(numerator, denominator);
+		numerator /= gcd;
+		denominator /= gcd;
+	}
+
+	private int inbuilt_gcd(int a, int b){
+		if(b==0){
+			return a;
+		}
+		return inbuilt_gcd(b, a%b);
+	}
+
+	public void print(){
+		System.out.println(numerator + "/" + denominator);
+	}
+}
+
+class Solution {
+
+	public static void main(String args[]) {
+		Scanner sc = new Scanner(System.in);
+		int numerator = sc.nextInt();
+		int denominator = sc.nextInt();
+		Fraction f1 = new Fraction(numerator, denominator);
+
+		int queries = sc.nextInt();
+		for(int i=0; i<queries; i++){
+			int type = sc.nextInt();
+			int num = sc.nextInt();
+			int denom = sc.nextInt();
+
+			Fraction f2 = new Fraction(num, denom);
+
+			if(type==1){
+				f1.add(f2);
+			}
+			else if(type==2){
+				f1.multiply(f2);
+			}
+
+			f1.simplify();
+			f1.print();
+		}
+		sc.close();
+	}
+}
