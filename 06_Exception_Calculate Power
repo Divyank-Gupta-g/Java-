@@ -1,0 +1,43 @@
+class NegativeException extends Exception {
+    public NegativeException(String s)
+    {
+        super(s);
+    }
+}
+class ZeroException extends Exception {
+    public ZeroException(String s)
+    {
+        super(s);
+    }
+}
+public class Solution {
+    public static String calculatePower(String A, String B) {
+        try{
+            int base = Integer.parseInt(A);
+            int expo = Integer.parseInt(B);
+
+            if(base<0 || expo<0){
+                throw new NegativeException("A or B can't be negative.");
+            }
+
+            if(base==0 && expo==0){
+                throw new ZeroException("A and B both can't be zero.");
+            }
+
+            int result = (int) Math.pow(base, expo);
+            return String.valueOf(result);
+        }
+        catch(ArithmeticException e){
+            return "Arithmatic Exception occurred.";
+        }
+        catch(NumberFormatException e){
+            return "Number Format Exception occurred.";
+        }
+        catch(NegativeException|ZeroException e){
+            return e.getMessage();
+        }
+        catch(Exception e){
+            return "Some other Error occurred.";
+        }
+    }
+}
