@@ -1,0 +1,41 @@
+import java.util.Scanner;
+
+public class Solution {
+    public static String maximumOfAll(String A, String B) {
+        try{
+            double a = Double.parseDouble(A);
+            double b = Double.parseDouble(B);
+
+            double sum = a + b;
+            double diff = a - b;
+            double div = b!=0?a/b : Double.POSITIVE_INFINITY;
+            double mult = a*b;
+
+            double max = Math.max(Math.max(sum, diff), Math.max(div, mult));
+            int res = (int) (max);
+
+            if(Double.isInfinite(max)){
+                throw new ArithmeticException("Arithmetic Exception occurred.");
+            }
+            return String.valueOf(res);
+        }
+        catch(ArithmeticException e){
+            return "Arithmetic Exception occurred.";
+        }
+        catch(NumberFormatException e){
+            return "Number Format Exception occurred.";
+        }
+        catch(Exception e){
+            return "Some other error occurred.";
+        }
+    }
+
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+
+        String A = sc.next();
+        String B = sc.next();
+
+        System.out.println(maximumOfAll(A, B));
+    }
+}
