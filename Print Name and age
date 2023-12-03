@@ -1,0 +1,30 @@
+import java.util.* ;
+import java.io.*; 
+class Person {
+	private String name;
+	private int age;
+
+	public void setValue(String name, int age){
+		this.name = name;
+		this.age = age;
+	}
+
+	public void getValue(){
+		System.out.println("The name of the person is " + name + " and the age is " + age + ".");
+	}
+}
+
+class Solution {
+	
+	public static void main(String args[]) {
+		Scanner sc = new Scanner(System.in);
+		Person person = new Person();
+		String name = sc.nextLine();
+		int age = sc.nextInt();
+
+		person.setValue(name, age);
+		person.getValue();
+		sc.close();
+	}
+}
+		
