@@ -1,0 +1,35 @@
+import java.util.Scanner;
+
+public class Solution {
+    public static String division(String A, String B) {
+        try{
+            double numerator = Double.parseDouble(A);
+            double denominator = Double.parseDouble(B);
+
+            if(denominator==0){
+                throw new ArithmeticException("Division by zero is not allowed.");
+            }
+
+            int result = (int) (numerator/denominator);
+            return String.valueOf(result);
+        }
+        catch(ArithmeticException e){
+            return "Arithmetic Exception occurred.";
+        }
+        catch(NumberFormatException e){
+            return "Number Format Exception occurred.";
+        }
+        catch(Exception e){
+            return "Some other error occurred.";
+        }
+    }
+
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+
+        String A = sc.next();
+        String B = sc.next();
+
+        System.out.println(division(A, B));
+    }
+}
