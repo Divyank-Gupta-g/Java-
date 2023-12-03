@@ -1,0 +1,29 @@
+import java.util.* ;
+import java.io.*; 
+public class Rectangle { 
+    double length;
+    double breadth;
+
+    public void setLength(double length){
+        this.length = length;
+    }
+
+    public void setBreadth(double breadth){
+        this.breadth = breadth;
+    }
+
+    int getArea(){
+        return (int) (length*breadth);
+    }
+
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+
+        Rectangle rectangle = new Rectangle();
+
+        rectangle.setLength(sc.nextDouble());
+        rectangle.setBreadth(sc.nextDouble());
+
+        System.out.println(rectangle.getArea());
+    }
+}
