@@ -1,0 +1,52 @@
+import java.util.*;
+public class Solution {
+    public static List<Integer> sharingCoins(List<List<String>> queries) {
+       List<Integer> result = new ArrayList<>();
+       Map<String, Integer> coinsMap = new HashMap<>();
+
+       for(List<String> query : queries){
+           int type = Integer.parseInt(query.get(0));
+           String person = query.get(1);
+
+           if(type==1){
+               int coins = Integer.parseInt(query.get(2));
+               coinsMap.put(person, coinsMap.getOrDefault(person, 0)+coins);
+           }
+           else if(type==2){
+               result.add(coinsMap.getOrDefault(person, 0));
+           }
+       }
+       return result;
+    }
+
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+
+        int Q = sc.nextInt();
+
+        List<List<String>> queries = new ArrayList<>();
+
+        for(int i=0; i<Q; i++){
+            int type = sc.nextInt();
+            List<String> query = new ArrayList<>();
+            query.add(Integer.toString(type));
+
+            if(type==1){
+                query.add(sc.next());
+                query.add(Integer.toString(sc.nextInt()));
+            }
+            else if(type==2){
+                query.add(sc.next());
+            }
+
+            queries.add(query);
+        }
+
+        List<Integer> result = sharingCoins(queries);
+
+        for(int coins : result){
+            System.out.println(coins);
+        }
+        sc.close();
+    }
+}
